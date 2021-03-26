@@ -469,7 +469,7 @@
 //    1、可以暂停，继续。 不用像NSTimer一样需要重新创建。
 //    2、性能较好。
 //    缺点：
-//    1、每次resume都会先执行一次。
+//    1、dispatch_resume dispatch_suspend dispatch_source_cancel需要按状态使用，否则crash
 //    共同点：
 //    1、如果不手动释放就不会走dealloc。
 //    2、不精确
