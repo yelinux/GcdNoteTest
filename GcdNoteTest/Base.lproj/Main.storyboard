@@ -1,24 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9eY-cB-XQR">
+                                <rect key="frame" x="0.0" y="44" width="414" height="480"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ei-cm-Nv2">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
+                                        <state key="normal" title="同步任务+串行队列"/>
+                                        <connections>
+                                            <action selector="click0:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cZL-Qy-rF7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaU-On-vSh">
+                                        <rect key="frame" x="0.0" y="30" width="414" height="30"/>
+                                        <state key="normal" title="同步任务+并发队列"/>
+                                        <connections>
+                                            <action selector="click1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rAd-qu-SYH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rl8-Id-dXY">
+                                        <rect key="frame" x="0.0" y="60" width="414" height="30"/>
+                                        <state key="normal" title="异步任务+串行队列"/>
+                                        <connections>
+                                            <action selector="click2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mAh-uW-RWr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qtl-Xi-lT6">
+                                        <rect key="frame" x="0.0" y="90" width="414" height="30"/>
+                                        <state key="normal" title="异步任务+并发队列"/>
+                                        <connections>
+                                            <action selector="click3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UsL-Sp-cPk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IgL-VB-Fy6">
+                                        <rect key="frame" x="0.0" y="120" width="414" height="30"/>
+                                        <state key="normal" title="主队列+同步任务(崩溃)"/>
+                                        <connections>
+                                            <action selector="click4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zPH-h2-Ebp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zfx-Tt-ofq">
+                                        <rect key="frame" x="0.0" y="150" width="414" height="30"/>
+                                        <state key="normal" title="主队列+异步任务"/>
+                                        <connections>
+                                            <action selector="click5:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mpb-Lp-gDq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OBY-j8-gi8">
+                                        <rect key="frame" x="0.0" y="180" width="414" height="30"/>
+                                        <state key="normal" title="『异步执行+串行队列』嵌套『同一个串行队列』造成死锁"/>
+                                        <connections>
+                                            <action selector="click6:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jzv-LO-lqf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyR-hQ-z3V">
+                                        <rect key="frame" x="0.0" y="210" width="414" height="30"/>
+                                        <state key="normal" title="GCD线程间的通信"/>
+                                        <connections>
+                                            <action selector="click7:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HIK-Sg-7fC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjE-pP-D3B">
+                                        <rect key="frame" x="0.0" y="240" width="414" height="30"/>
+                                        <state key="normal" title="栅栏方法dispatch_barrier_async"/>
+                                        <connections>
+                                            <action selector="click8:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iWd-Cf-IIo"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbx-0N-Rrb">
+                                        <rect key="frame" x="0.0" y="270" width="414" height="30"/>
+                                        <state key="normal" title="栅栏方法dispatch_barrier_sync"/>
+                                        <connections>
+                                            <action selector="click9:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lym-m3-fgx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCC-z4-lL8">
+                                        <rect key="frame" x="0.0" y="300" width="414" height="30"/>
+                                        <state key="normal" title="延时执行方法-dispatch_after"/>
+                                        <connections>
+                                            <action selector="click10:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iPz-sq-L1Z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1s-qF-eZH">
+                                        <rect key="frame" x="0.0" y="330" width="414" height="30"/>
+                                        <state key="normal" title="一次性代码-dispatch_once"/>
+                                        <connections>
+                                            <action selector="click11:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C94-dG-gLl"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UP3-zP-AMO">
+                                        <rect key="frame" x="0.0" y="360" width="414" height="30"/>
+                                        <state key="normal" title="调度组dispatch_group_wait"/>
+                                        <connections>
+                                            <action selector="click12:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HXI-fx-Y42"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAn-Tz-nMd">
+                                        <rect key="frame" x="0.0" y="390" width="414" height="30"/>
+                                        <state key="normal" title="调度组dispatch_group_notify"/>
+                                        <connections>
+                                            <action selector="click13:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8WA-no-J6k"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isd-FZ-woJ">
+                                        <rect key="frame" x="0.0" y="420" width="414" height="30"/>
+                                        <state key="normal" title="信号量"/>
+                                        <connections>
+                                            <action selector="click14:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XOw-fA-nye"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTv-XH-jTm">
+                                        <rect key="frame" x="0.0" y="450" width="414" height="30"/>
+                                        <state key="normal" title="定时器Dispatch_source"/>
+                                        <connections>
+                                            <action selector="click15:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YTD-Xb-Dnv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9eY-cB-XQR" secondAttribute="trailing" id="I5h-jJ-FbJ"/>
+                            <constraint firstItem="9eY-cB-XQR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="g3f-zf-9Ig"/>
+                            <constraint firstItem="9eY-cB-XQR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="q6g-Gy-ott"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="39" y="71"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
