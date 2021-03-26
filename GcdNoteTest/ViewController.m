@@ -24,7 +24,7 @@
 - (IBAction)click0:(id)sender {
     NSLog(@"click - currentThread-1:%@", [NSThread currentThread]);
     
-    dispatch_queue_t queue = dispatch_queue_create("com.shen.thread.demo", DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t queue = dispatch_queue_create("com.gcd.thread.demo", DISPATCH_QUEUE_SERIAL);
     
     for(NSInteger i = 0 ; i < 10 ; i++){
         dispatch_sync(queue, ^{
@@ -62,7 +62,7 @@
 - (IBAction)click1:(id)sender {
     NSLog(@"click - currentThread-1:%@", [NSThread currentThread]);
     
-    dispatch_queue_t queue = dispatch_queue_create("com.shen.thread.demo", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_queue_t queue = dispatch_queue_create("com.gcd.thread.demo", DISPATCH_QUEUE_CONCURRENT);
     
     for(NSInteger i = 0 ; i < 10 ; i++){
         dispatch_sync(queue, ^{
@@ -99,7 +99,7 @@
 //异步任务+串行队列
 - (IBAction)click2:(id)sender {
     NSLog(@"click - currentThread-1:%@", [NSThread currentThread]);
-    dispatch_queue_t queue = dispatch_queue_create("com.shen.thread.demo", DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t queue = dispatch_queue_create("com.gcd.thread.demo", DISPATCH_QUEUE_SERIAL);
     for(NSInteger i = 0 ; i < 10 ; i++){
         dispatch_async(queue, ^{
             NSLog(@"b - currentThread-%ld:%@", i,  [NSThread currentThread]);
@@ -135,7 +135,7 @@
 //异步任务+并发队列
 - (IBAction)click3:(id)sender {
     NSLog(@"click - currentThread-1:%@", [NSThread currentThread]);
-    dispatch_queue_t queue = dispatch_queue_create("com.shen.thread.demo", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_queue_t queue = dispatch_queue_create("com.gcd.thread.demo", DISPATCH_QUEUE_CONCURRENT);
     for(NSInteger i = 0 ; i < 10 ; i++){
         dispatch_async(queue, ^{
             NSLog(@"b - currentThread-%ld:%@", i,  [NSThread currentThread]);
@@ -222,7 +222,7 @@
 
 //『异步执行+串行队列』嵌套『同一个串行队列』造成死锁的情况请看如下代码：
 - (IBAction)click6:(id)sender {
-    dispatch_queue_t queue = dispatch_queue_create("com.shen.thread.demo", DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t queue = dispatch_queue_create("com.gcd.thread.demo", DISPATCH_QUEUE_SERIAL);
     //异步任务A
     dispatch_async(queue, ^{
         //同步任务B
@@ -237,7 +237,7 @@
 
 //GCD线程间的通信
 - (IBAction)click7:(id)sender {
-    dispatch_queue_t queue = dispatch_queue_create("com.shen.thread.demo", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_queue_t queue = dispatch_queue_create("com.gcd.thread.demo", DISPATCH_QUEUE_CONCURRENT);
     dispatch_async(queue, ^{
         NSLog(@"1---%@",[NSThread currentThread]);
         // 模拟耗时操作
@@ -256,7 +256,7 @@
 
 //栅栏方法dispatch_barrier_async
 - (IBAction)click8:(id)sender {
-    dispatch_queue_t queue = dispatch_queue_create("com.shen.thread.demo", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_queue_t queue = dispatch_queue_create("com.gcd.thread.demo", DISPATCH_QUEUE_CONCURRENT);
     NSLog(@"start");
     dispatch_async(queue, ^{
         NSLog(@"currentThread-1:%@", [NSThread currentThread]);
@@ -284,7 +284,7 @@
 
 //栅栏方法dispatch_barrier_sync
 - (IBAction)click9:(id)sender {
-    dispatch_queue_t queue = dispatch_queue_create("com.shen.thread.demo", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_queue_t queue = dispatch_queue_create("com.gcd.thread.demo", DISPATCH_QUEUE_CONCURRENT);
     NSLog(@"start");
     dispatch_async(queue, ^{
         NSLog(@"currentThread-1:%@", [NSThread currentThread]);
