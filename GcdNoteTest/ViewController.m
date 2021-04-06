@@ -10,10 +10,15 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) dispatch_source_t timer;
+@property (assign, nonatomic) double randomNum;
 
 @end
 
 @implementation ViewController
+
+-(double)randomNum{
+    return (arc4random() % 10) / 10.0;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,32 +33,35 @@
     
     for(NSInteger i = 0 ; i < 10 ; i++){
         dispatch_sync(queue, ^{
+            [NSThread sleepForTimeInterval:self.randomNum];
             NSLog(@"b - currentThread-%ld:%@", i,  [NSThread currentThread]);
         });
+        [NSThread sleepForTimeInterval:self.randomNum];
         NSLog(@"for - currentThread-%ld:%@", i, [NSThread currentThread]);
     }
     
-//    2021-03-26 13:43:33.216102+0800 GcdNoteTest[71541:2317948] click - currentThread-1:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.216410+0800 GcdNoteTest[71541:2317948] b - currentThread-0:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.216660+0800 GcdNoteTest[71541:2317948] for - currentThread-0:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.216934+0800 GcdNoteTest[71541:2317948] b - currentThread-1:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.217183+0800 GcdNoteTest[71541:2317948] for - currentThread-1:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.217421+0800 GcdNoteTest[71541:2317948] b - currentThread-2:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.217646+0800 GcdNoteTest[71541:2317948] for - currentThread-2:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.217859+0800 GcdNoteTest[71541:2317948] b - currentThread-3:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.218242+0800 GcdNoteTest[71541:2317948] for - currentThread-3:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.218720+0800 GcdNoteTest[71541:2317948] b - currentThread-4:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.219076+0800 GcdNoteTest[71541:2317948] for - currentThread-4:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.228744+0800 GcdNoteTest[71541:2317948] b - currentThread-5:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.228934+0800 GcdNoteTest[71541:2317948] for - currentThread-5:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.229108+0800 GcdNoteTest[71541:2317948] b - currentThread-6:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.229289+0800 GcdNoteTest[71541:2317948] for - currentThread-6:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.229493+0800 GcdNoteTest[71541:2317948] b - currentThread-7:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.229698+0800 GcdNoteTest[71541:2317948] for - currentThread-7:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.229879+0800 GcdNoteTest[71541:2317948] b - currentThread-8:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.230023+0800 GcdNoteTest[71541:2317948] for - currentThread-8:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.230202+0800 GcdNoteTest[71541:2317948] b - currentThread-9:<NSThread: 0x600001374040>{number = 1, name = main}
-//    2021-03-26 13:43:33.230327+0800 GcdNoteTest[71541:2317948] for - currentThread-9:<NSThread: 0x600001374040>{number = 1, name = main}
+//    2021-04-06 09:00:58.269337+0800 GcdNoteTest[30952:4935063] click - currentThread-1:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:00:59.069918+0800 GcdNoteTest[30952:4935063] b - currentThread-0:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:00:59.170726+0800 GcdNoteTest[30952:4935063] for - currentThread-0:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:00:59.672412+0800 GcdNoteTest[30952:4935063] b - currentThread-1:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:00:59.974290+0800 GcdNoteTest[30952:4935063] for - currentThread-1:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:00.875693+0800 GcdNoteTest[30952:4935063] b - currentThread-2:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:01.476865+0800 GcdNoteTest[30952:4935063] for - currentThread-2:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:02.178486+0800 GcdNoteTest[30952:4935063] b - currentThread-3:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:02.179157+0800 GcdNoteTest[30952:4935063] for - currentThread-3:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:02.279825+0800 GcdNoteTest[30952:4935063] b - currentThread-4:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:02.581765+0800 GcdNoteTest[30952:4935063] for - currentThread-4:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:03.083601+0800 GcdNoteTest[30952:4935063] b - currentThread-5:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:03.084178+0800 GcdNoteTest[30952:4935063] for - currentThread-5:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:03.084729+0800 GcdNoteTest[30952:4935063] b - currentThread-6:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:03.685384+0800 GcdNoteTest[30952:4935063] for - currentThread-6:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:03.685983+0800 GcdNoteTest[30952:4935063] b - currentThread-7:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:04.287483+0800 GcdNoteTest[30952:4935063] for - currentThread-7:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:04.788371+0800 GcdNoteTest[30952:4935063] b - currentThread-8:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:05.189141+0800 GcdNoteTest[30952:4935063] for - currentThread-8:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:06.090878+0800 GcdNoteTest[30952:4935063] b - currentThread-9:<NSThread: 0x6000004f0540>{number = 1, name = main}
+//    2021-04-06 09:01:06.391605+0800 GcdNoteTest[30952:4935063] for - currentThread-9:<NSThread: 0x6000004f0540>{number = 1, name = main}
+
 
     //从上面代码运行的结果可以看出，并没有开启新的线程，任务是按顺序执行的。
 }
@@ -66,32 +74,35 @@
     
     for(NSInteger i = 0 ; i < 10 ; i++){
         dispatch_sync(queue, ^{
+            [NSThread sleepForTimeInterval:self.randomNum];
             NSLog(@"b - currentThread-%ld:%@", i,  [NSThread currentThread]);
         });
+        [NSThread sleepForTimeInterval:self.randomNum];
         NSLog(@"for - currentThread-%ld:%@", i, [NSThread currentThread]);
     }
     
-//    2021-03-26 13:41:34.679984+0800 GcdNoteTest[71510:2316131] click - currentThread-1:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.680174+0800 GcdNoteTest[71510:2316131] b - currentThread-0:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.680281+0800 GcdNoteTest[71510:2316131] for - currentThread-0:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.680398+0800 GcdNoteTest[71510:2316131] b - currentThread-1:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.680522+0800 GcdNoteTest[71510:2316131] for - currentThread-1:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.680621+0800 GcdNoteTest[71510:2316131] b - currentThread-2:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.680937+0800 GcdNoteTest[71510:2316131] for - currentThread-2:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.681346+0800 GcdNoteTest[71510:2316131] b - currentThread-3:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.681687+0800 GcdNoteTest[71510:2316131] for - currentThread-3:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.681916+0800 GcdNoteTest[71510:2316131] b - currentThread-4:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.682156+0800 GcdNoteTest[71510:2316131] for - currentThread-4:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.715696+0800 GcdNoteTest[71510:2316131] b - currentThread-5:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.715827+0800 GcdNoteTest[71510:2316131] for - currentThread-5:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.715942+0800 GcdNoteTest[71510:2316131] b - currentThread-6:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.716041+0800 GcdNoteTest[71510:2316131] for - currentThread-6:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.716164+0800 GcdNoteTest[71510:2316131] b - currentThread-7:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.716253+0800 GcdNoteTest[71510:2316131] for - currentThread-7:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.716358+0800 GcdNoteTest[71510:2316131] b - currentThread-8:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.716450+0800 GcdNoteTest[71510:2316131] for - currentThread-8:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.716554+0800 GcdNoteTest[71510:2316131] b - currentThread-9:<NSThread: 0x6000014f0780>{number = 1, name = main}
-//    2021-03-26 13:41:34.716661+0800 GcdNoteTest[71510:2316131] for - currentThread-9:<NSThread: 0x6000014f0780>{number = 1, name = main}
+//    2021-04-06 09:02:14.910238+0800 GcdNoteTest[30979:4936249] click - currentThread-1:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:15.811987+0800 GcdNoteTest[30979:4936249] b - currentThread-0:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:16.314203+0800 GcdNoteTest[30979:4936249] for - currentThread-0:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:16.314867+0800 GcdNoteTest[30979:4936249] b - currentThread-1:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:16.816356+0800 GcdNoteTest[30979:4936249] for - currentThread-1:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:17.717957+0800 GcdNoteTest[30979:4936249] b - currentThread-2:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:18.418730+0800 GcdNoteTest[30979:4936249] for - currentThread-2:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:18.720620+0800 GcdNoteTest[30979:4936249] b - currentThread-3:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:19.422807+0800 GcdNoteTest[30979:4936249] for - currentThread-3:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:20.224695+0800 GcdNoteTest[30979:4936249] b - currentThread-4:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:21.125595+0800 GcdNoteTest[30979:4936249] for - currentThread-4:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:21.227652+0800 GcdNoteTest[30979:4936249] b - currentThread-5:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:21.329498+0800 GcdNoteTest[30979:4936249] for - currentThread-5:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:21.731374+0800 GcdNoteTest[30979:4936249] b - currentThread-6:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:22.232531+0800 GcdNoteTest[30979:4936249] for - currentThread-6:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:22.834414+0800 GcdNoteTest[30979:4936249] b - currentThread-7:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:22.835002+0800 GcdNoteTest[30979:4936249] for - currentThread-7:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:22.835425+0800 GcdNoteTest[30979:4936249] b - currentThread-8:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:23.335856+0800 GcdNoteTest[30979:4936249] for - currentThread-8:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:24.036415+0800 GcdNoteTest[30979:4936249] b - currentThread-9:<NSThread: 0x600000a8c880>{number = 1, name = main}
+//    2021-04-06 09:02:24.437038+0800 GcdNoteTest[30979:4936249] for - currentThread-9:<NSThread: 0x600000a8c880>{number = 1, name = main}
+
 
 //    从上面代码运行的结果可以看出，同步任务不会开启新的线程，虽然任务在并发队列中，但是系统只默认开启了一个主线程，没有开启子线程，所以任务串行执行。
 }
@@ -102,8 +113,10 @@
     dispatch_queue_t queue = dispatch_queue_create("com.gcd.thread.demo", DISPATCH_QUEUE_SERIAL);
     for(NSInteger i = 0 ; i < 10 ; i++){
         dispatch_async(queue, ^{
+            [NSThread sleepForTimeInterval:self.randomNum];
             NSLog(@"b - currentThread-%ld:%@", i,  [NSThread currentThread]);
         });
+        [NSThread sleepForTimeInterval:self.randomNum];
         NSLog(@"for - currentThread-%ld:%@", i, [NSThread currentThread]);
     }
     
@@ -128,6 +141,29 @@
 //    2021-03-26 13:39:18.914502+0800 GcdNoteTest[71485:2314538] b - currentThread-7:<NSThread: 0x600002641240>{number = 6, name = (null)}
 //    2021-03-26 13:39:18.914637+0800 GcdNoteTest[71485:2314538] b - currentThread-8:<NSThread: 0x600002641240>{number = 6, name = (null)}
 //    2021-03-26 13:39:18.914831+0800 GcdNoteTest[71485:2314538] b - currentThread-9:<NSThread: 0x600002641240>{number = 6, name = (null)}
+///加延时后
+//    2021-04-06 09:03:48.118416+0800 GcdNoteTest[31001:4937181] click - currentThread-1:<NSThread: 0x600003204180>{number = 1, name = main}
+//    2021-04-06 09:03:48.322347+0800 GcdNoteTest[31001:4937359] b - currentThread-0:<NSThread: 0x60000324b9c0>{number = 4, name = (null)}
+//    2021-04-06 09:03:48.820065+0800 GcdNoteTest[31001:4937181] for - currentThread-0:<NSThread: 0x600003204180>{number = 1, name = main}
+//    2021-04-06 09:03:48.925241+0800 GcdNoteTest[31001:4937359] b - currentThread-1:<NSThread: 0x60000324b9c0>{number = 4, name = (null)}
+//    2021-04-06 09:03:49.322233+0800 GcdNoteTest[31001:4937181] for - currentThread-1:<NSThread: 0x600003204180>{number = 1, name = main}
+//    2021-04-06 09:03:49.723917+0800 GcdNoteTest[31001:4937181] for - currentThread-2:<NSThread: 0x600003204180>{number = 1, name = main}
+//    2021-04-06 09:03:49.724213+0800 GcdNoteTest[31001:4937181] for - currentThread-3:<NSThread: 0x600003204180>{number = 1, name = main}
+//    2021-04-06 09:03:49.725905+0800 GcdNoteTest[31001:4937359] b - currentThread-2:<NSThread: 0x60000324b9c0>{number = 4, name = (null)}
+//    2021-04-06 09:03:49.830705+0800 GcdNoteTest[31001:4937359] b - currentThread-3:<NSThread: 0x60000324b9c0>{number = 4, name = (null)}
+//    2021-04-06 09:03:50.625415+0800 GcdNoteTest[31001:4937181] for - currentThread-4:<NSThread: 0x600003204180>{number = 1, name = main}
+//    2021-04-06 09:03:50.634808+0800 GcdNoteTest[31001:4937359] b - currentThread-4:<NSThread: 0x60000324b9c0>{number = 4, name = (null)}
+//    2021-04-06 09:03:50.736016+0800 GcdNoteTest[31001:4937359] b - currentThread-5:<NSThread: 0x60000324b9c0>{number = 4, name = (null)}
+//    2021-04-06 09:03:51.526320+0800 GcdNoteTest[31001:4937181] for - currentThread-5:<NSThread: 0x600003204180>{number = 1, name = main}
+//    2021-04-06 09:03:52.128211+0800 GcdNoteTest[31001:4937181] for - currentThread-6:<NSThread: 0x600003204180>{number = 1, name = main}
+//    2021-04-06 09:03:52.429793+0800 GcdNoteTest[31001:4937359] b - currentThread-6:<NSThread: 0x60000324b9c0>{number = 4, name = (null)}
+//    2021-04-06 09:03:52.729025+0800 GcdNoteTest[31001:4937181] for - currentThread-7:<NSThread: 0x600003204180>{number = 1, name = main}
+//    2021-04-06 09:03:53.130292+0800 GcdNoteTest[31001:4937181] for - currentThread-8:<NSThread: 0x600003204180>{number = 1, name = main}
+//    2021-04-06 09:03:53.130820+0800 GcdNoteTest[31001:4937181] for - currentThread-9:<NSThread: 0x600003204180>{number = 1, name = main}
+//    2021-04-06 09:03:53.133484+0800 GcdNoteTest[31001:4937359] b - currentThread-7:<NSThread: 0x60000324b9c0>{number = 4, name = (null)}
+//    2021-04-06 09:03:53.737266+0800 GcdNoteTest[31001:4937359] b - currentThread-8:<NSThread: 0x60000324b9c0>{number = 4, name = (null)}
+//    2021-04-06 09:03:53.838456+0800 GcdNoteTest[31001:4937359] b - currentThread-9:<NSThread: 0x60000324b9c0>{number = 4, name = (null)}
+
 
 //    从上面代码运行的结果可以看出，开启了一个新的线程，说明异步任务具备开启新的线程的能力，但是由于任务是在串行队列中执行的，所以任务是顺序执行的。
 }
@@ -138,8 +174,10 @@
     dispatch_queue_t queue = dispatch_queue_create("com.gcd.thread.demo", DISPATCH_QUEUE_CONCURRENT);
     for(NSInteger i = 0 ; i < 10 ; i++){
         dispatch_async(queue, ^{
+            [NSThread sleepForTimeInterval:self.randomNum];
             NSLog(@"b - currentThread-%ld:%@", i,  [NSThread currentThread]);
         });
+        [NSThread sleepForTimeInterval:self.randomNum];
         NSLog(@"for - currentThread-%ld:%@", i, [NSThread currentThread]);
     }
 //    2021-03-26 13:35:58.981875+0800 GcdNoteTest[71429:2311516] click - currentThread-1:<NSThread: 0x600003b0c080>{number = 1, name = main}
@@ -163,6 +201,28 @@
 //    2021-03-26 13:35:59.024334+0800 GcdNoteTest[71429:2311690] b - currentThread-8:<NSThread: 0x600003b2a340>{number = 5, name = (null)}
 //    2021-03-26 13:35:59.024398+0800 GcdNoteTest[71429:2311516] for - currentThread-9:<NSThread: 0x600003b0c080>{number = 1, name = main}
 //    2021-03-26 13:35:59.024406+0800 GcdNoteTest[71429:2311692] b - currentThread-9:<NSThread: 0x600003b32c80>{number = 7, name = (null)}
+///加延时后
+//    2021-04-06 09:05:53.198242+0800 GcdNoteTest[31051:4939259] click - currentThread-1:<NSThread: 0x600000330180>{number = 1, name = main}
+//    2021-04-06 09:05:53.803021+0800 GcdNoteTest[31051:4939437] b - currentThread-0:<NSThread: 0x6000003795c0>{number = 6, name = (null)}
+//    2021-04-06 09:05:54.099709+0800 GcdNoteTest[31051:4939259] for - currentThread-0:<NSThread: 0x600000330180>{number = 1, name = main}
+//    2021-04-06 09:05:54.500839+0800 GcdNoteTest[31051:4939259] for - currentThread-1:<NSThread: 0x600000330180>{number = 1, name = main}
+//    2021-04-06 09:05:54.701888+0800 GcdNoteTest[31051:4939259] for - currentThread-2:<NSThread: 0x600000330180>{number = 1, name = main}
+//    2021-04-06 09:05:54.702633+0800 GcdNoteTest[31051:4939437] b - currentThread-1:<NSThread: 0x6000003795c0>{number = 6, name = (null)}
+//    2021-04-06 09:05:54.807768+0800 GcdNoteTest[31051:4939439] b - currentThread-3:<NSThread: 0x600000330d00>{number = 4, name = (null)}
+//    2021-04-06 09:05:55.103191+0800 GcdNoteTest[31051:4939259] for - currentThread-3:<NSThread: 0x600000330180>{number = 1, name = main}
+//    2021-04-06 09:05:55.104148+0800 GcdNoteTest[31051:4939439] b - currentThread-4:<NSThread: 0x600000330d00>{number = 4, name = (null)}
+//    2021-04-06 09:05:55.301515+0800 GcdNoteTest[31051:4939438] b - currentThread-2:<NSThread: 0x600000368500>{number = 7, name = (null)}
+//    2021-04-06 09:05:55.504460+0800 GcdNoteTest[31051:4939259] for - currentThread-4:<NSThread: 0x600000330180>{number = 1, name = main}
+//    2021-04-06 09:05:55.910114+0800 GcdNoteTest[31051:4939438] b - currentThread-5:<NSThread: 0x600000368500>{number = 7, name = (null)}
+//    2021-04-06 09:05:56.106327+0800 GcdNoteTest[31051:4939259] for - currentThread-5:<NSThread: 0x600000330180>{number = 1, name = main}
+//    2021-04-06 09:05:56.707169+0800 GcdNoteTest[31051:4939259] for - currentThread-6:<NSThread: 0x600000330180>{number = 1, name = main}
+//    2021-04-06 09:05:56.710954+0800 GcdNoteTest[31051:4939438] b - currentThread-6:<NSThread: 0x600000368500>{number = 7, name = (null)}
+//    2021-04-06 09:05:56.909871+0800 GcdNoteTest[31051:4939439] b - currentThread-7:<NSThread: 0x600000330d00>{number = 4, name = (null)}
+//    2021-04-06 09:05:57.208736+0800 GcdNoteTest[31051:4939259] for - currentThread-7:<NSThread: 0x600000330180>{number = 1, name = main}
+//    2021-04-06 09:05:57.209563+0800 GcdNoteTest[31051:4939439] b - currentThread-8:<NSThread: 0x600000330d00>{number = 4, name = (null)}
+//    2021-04-06 09:05:57.310501+0800 GcdNoteTest[31051:4939259] for - currentThread-8:<NSThread: 0x600000330180>{number = 1, name = main}
+//    2021-04-06 09:05:57.514190+0800 GcdNoteTest[31051:4939439] b - currentThread-9:<NSThread: 0x600000330d00>{number = 4, name = (null)}
+//    2021-04-06 09:05:58.011687+0800 GcdNoteTest[31051:4939259] for - currentThread-9:<NSThread: 0x600000330180>{number = 1, name = main}
 
 }
 
@@ -189,8 +249,10 @@
     dispatch_queue_t queue = dispatch_get_main_queue();
     for(NSInteger i = 0 ; i < 10 ; i++){
         dispatch_async(queue, ^{
+            [NSThread sleepForTimeInterval:self.randomNum];
             NSLog(@"b - currentThread-%ld:%@", i,  [NSThread currentThread]);
         });
+        [NSThread sleepForTimeInterval:self.randomNum];
         NSLog(@"for - currentThread-%ld:%@", i, [NSThread currentThread]);
     }
     
@@ -215,6 +277,30 @@
 //    2021-03-26 13:48:30.709159+0800 GcdNoteTest[71658:2323524] b - currentThread-7:<NSThread: 0x600001c80780>{number = 1, name = main}
 //    2021-03-26 13:48:30.709337+0800 GcdNoteTest[71658:2323524] b - currentThread-8:<NSThread: 0x600001c80780>{number = 1, name = main}
 //    2021-03-26 13:48:30.709497+0800 GcdNoteTest[71658:2323524] b - currentThread-9:<NSThread: 0x600001c80780>{number = 1, name = main}
+    
+    ///加延时后
+//    2021-04-06 09:07:19.116725+0800 GcdNoteTest[31077:4940646] click - currentThread-1:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:19.518487+0800 GcdNoteTest[31077:4940646] for - currentThread-0:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:20.119664+0800 GcdNoteTest[31077:4940646] for - currentThread-1:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:21.020551+0800 GcdNoteTest[31077:4940646] for - currentThread-2:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:21.722499+0800 GcdNoteTest[31077:4940646] for - currentThread-3:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:21.723215+0800 GcdNoteTest[31077:4940646] for - currentThread-4:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:22.623914+0800 GcdNoteTest[31077:4940646] for - currentThread-5:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:23.125311+0800 GcdNoteTest[31077:4940646] for - currentThread-6:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:23.227140+0800 GcdNoteTest[31077:4940646] for - currentThread-7:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:23.928697+0800 GcdNoteTest[31077:4940646] for - currentThread-8:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:24.030674+0800 GcdNoteTest[31077:4940646] for - currentThread-9:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:24.134874+0800 GcdNoteTest[31077:4940646] b - currentThread-0:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:24.135455+0800 GcdNoteTest[31077:4940646] b - currentThread-1:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:24.336059+0800 GcdNoteTest[31077:4940646] b - currentThread-2:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:24.936734+0800 GcdNoteTest[31077:4940646] b - currentThread-3:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:25.038628+0800 GcdNoteTest[31077:4940646] b - currentThread-4:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:25.940979+0800 GcdNoteTest[31077:4940646] b - currentThread-5:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:26.142882+0800 GcdNoteTest[31077:4940646] b - currentThread-6:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:26.543957+0800 GcdNoteTest[31077:4940646] b - currentThread-7:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:27.345459+0800 GcdNoteTest[31077:4940646] b - currentThread-8:<NSThread: 0x600003180040>{number = 1, name = main}
+//    2021-04-06 09:07:27.647069+0800 GcdNoteTest[31077:4940646] b - currentThread-9:<NSThread: 0x600003180040>{number = 1, name = main}
+
     
 //    从上面代码的运行结果可以看出，虽然是异步任务，但是并没有开启新的线程，任然是在主线程中执行，并且任务是顺序执行的。
 
